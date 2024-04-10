@@ -5,7 +5,7 @@ function MapContainer() {
   const mapId = '1ce706a756ccf005'
 
   return (
-    <APIProvider apiKey={'AIzaSyBWM5dWbLzIxCd131uzV-w2yriGGdQ_ANE'}>
+    <APIProvider apiKey={'AIzaSyCRB-StFGqz7EipZPssIvHG5F852bqT4CI'}>
       <div className="relative z-0 h-80 w-full overflow-hidden rounded-xl">
         <Map
           options={{
