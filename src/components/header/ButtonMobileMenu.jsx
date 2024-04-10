@@ -1,11 +1,18 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-const ButtonMobileMenu = () => {
-  const [buttonOpened, setButton] = useState(false)
-
+const ButtonMobileMenu = ({ toggleMenu, menuOpened }) => {
   const topBunRef = useRef(null)
   const midBunRef = useRef(null)
   const botBunRef = useRef(null)
+  const buttonRef = useRef(null)
+
+  const [buttonOpened, setButtonOpened] = useState(false)
+
+  useEffect(() => {
+    if (!menuOpened && buttonOpened) {
+      rotateClose()
+    }
+  }, [menuOpened])
 
   const toggleBunsY = () => {
     topBunRef.current.classList.toggle('-translate-y-[5px]')
@@ -15,45 +22,61 @@ const ButtonMobileMenu = () => {
   }
 
   const rotateBuns = () => {
-    topBunRef.current.classList.toggle('-rotate-45')
-    midBunRef.current.classList.toggle('-rotate-[135deg]')
+    topBunRef.current.classList.toggle('-rotate-[135deg]')
+    midBunRef.current.classList.toggle('-rotate-45')
     botBunRef.current.classList.toggle('-rotate-[135deg]')
   }
 
-  const handleClick = () => {
-    if (buttonOpened) {
+  const handleMenuClick = () => {
+    toggleButton()
+  }
+
+  const rotateOpen = () => {
+    toggleBunsY()
+    setTimeout(() => {
       rotateBuns()
-      setTimeout(() => {
-        toggleBunsY()
-      }, 100)
-      setButton(false)
-    } else {
+    }, 110)
+    setButtonOpened(!buttonOpened)
+  }
+
+  const rotateClose = () => {
+    rotateBuns()
+    setTimeout(() => {
       toggleBunsY()
-      setTimeout(() => {
-        rotateBuns()
-      }, 100)
-      setButton(true)
+    }, 110)
+    setButtonOpened(!buttonOpened)
+  }
+
+  const toggleButton = () => {
+    if (buttonOpened) {
+      rotateClose()
+      toggleMenu()
+    } else {
+      rotateOpen()
+      toggleMenu()
     }
+    setButtonOpened(!buttonOpened)
   }
 
   return (
     <>
       <button
-        onClick={handleClick}
+        ref={buttonRef}
+        onClick={handleMenuClick}
         type="button"
-        className="relative ml-auto flex h-12 w-12"
+        className="relative flex h-12 w-12 md:hidden"
       >
         <span
           ref={topBunRef}
-          className="absolute left-1/2 top-1/2 h-0.5 w-1/3 origin-center -translate-x-1/2 -translate-y-[5px] transform rounded bg-black transition-all"
+          className="absolute left-1/2 top-1/2 h-[2px] w-1/3 origin-center -translate-x-1/2 -translate-y-[5px] transform rounded bg-white transition-all duration-[125ms] ease-in-out"
         ></span>
         <span
           ref={midBunRef}
-          className="absolute left-1/2 top-1/2 h-0.5 w-1/3 origin-center -translate-x-1/2 -translate-y-1/2  transform rounded bg-black transition-all"
+          className="absolute left-1/2 top-1/2 h-[2px] w-1/3 origin-center -translate-x-1/2 -translate-y-[1px] transform  rounded bg-white transition-all duration-[125ms] ease-in-out"
         ></span>
         <span
           ref={botBunRef}
-          className="absolute left-1/2 top-1/2 h-0.5 w-1/3 origin-center -translate-x-1/2 translate-y-[3px] transform rounded bg-black transition-all"
+          className="absolute left-1/2 top-1/2 h-[2px] w-1/3 origin-center -translate-x-1/2 translate-y-[3px] transform rounded bg-white transition-all duration-[125ms] ease-in-out"
         ></span>
       </button>
     </>
