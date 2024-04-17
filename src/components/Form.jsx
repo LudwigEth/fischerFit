@@ -6,7 +6,7 @@ const Form = ({ formOpened, toggleForm }) => {
   const formRef = useRef(null)
   const closeFormButtonRef = useRef(null)
 
-  const [anrede, setAnrede] = useState('')
+  const [anrede, setAnrede] = useState('Bitte Wählen')
   const [vorname, setVorname] = useState('')
   const [nachname, setNachname] = useState('')
   const [ziele1, setZiele1] = useState(false)
@@ -101,10 +101,8 @@ const Form = ({ formOpened, toggleForm }) => {
 
       const checkFormValidity = () => {
         if (!hasEmptyString && isFormValid) {
-          console.log(true + 'helo')
           setFormValidity(true)
         } else if (hasTrueBoolean && isFormValid) {
-          console.log(true + 'melo')
           setFormValidity(true)
         } else {
           setFormValidity(false)
@@ -177,51 +175,56 @@ const Form = ({ formOpened, toggleForm }) => {
           </p>
         </div>
         <div className="flex flex-col gap-2">
-          <div className={`${formProgress === 0 ? 'flex-col' : 'hidden'}`}>
-            <div>
-              <label className="font-semibold" htmlFor="anrede">
-                Anrede:
-              </label>
-              <select
-                onChange={(e) => handleInputChange(setAnrede, e)}
-                id="anrede"
-                className="w-full cursor-pointer rounded-lg border border-zinc-300 p-2"
-                required={formProgress === 0 && true}
-              >
-                <option className="" value="">
-                  Bitte wählen
-                </option>
-                <option value="Herr">Herr</option>
-                <option value="Frau">Frau</option>
-              </select>
+          {formProgress === 0 && (
+            <div className={`${formProgress === 0 ? 'flex-col' : 'hidden'}`}>
+              <div>
+                <label className="font-semibold" htmlFor="anrede">
+                  Anrede:
+                </label>
+                <select
+                  onChange={(e) => handleInputChange(setAnrede, e)}
+                  id="anrede"
+                  className="w-full cursor-pointer rounded-lg border border-zinc-300 p-2"
+                  required={formProgress === 0}
+                  value={anrede}
+                >
+                  <option className="" value="">
+                    Bitte wählen
+                  </option>
+                  <option value="Herr">Herr</option>
+                  <option value="Frau">Frau</option>
+                </select>
+              </div>
+              <div className="flex flex-col">
+                <label className="font-semibold" htmlFor="vorname">
+                  Vorname:
+                </label>
+                <input
+                  onChange={(e) => handleInputChange(setVorname, e)}
+                  className="cursor-pointer rounded-lg border border-zinc-300 p-2"
+                  type="text"
+                  id="vorname"
+                  required={formProgress === 0}
+                  value={vorname}
+                />
+              </div>
+              <div className="flex flex-col">
+                <label className="font-semibold" htmlFor="nachname">
+                  Nachname:
+                </label>
+                <input
+                  onChange={(e) => handleInputChange(setNachname, e)}
+                  className="cursor-pointer rounded-lg border border-zinc-300 p-2"
+                  type="text"
+                  id="nachname"
+                  required={formProgress === 0}
+                  value={nachname}
+                />
+              </div>
             </div>
-            <div className="flex flex-col">
-              <label className="font-semibold" htmlFor="vorname">
-                Vorname:
-              </label>
-              <input
-                onChange={(e) => handleInputChange(setVorname, e)}
-                className="cursor-pointer rounded-lg border border-zinc-300 p-2"
-                type="text"
-                id="vorname"
-                required={formProgress === 0 && true}
-              />
-            </div>
-            <div className="flex flex-col">
-              <label className="font-semibold" htmlFor="nachname">
-                Nachname:
-              </label>
-              <input
-                onChange={(e) => handleInputChange(setNachname, e)}
-                className="cursor-pointer rounded-lg border border-zinc-300 p-2"
-                type="text"
-                id="nachname"
-                required={formProgress === 0 && true}
-              />
-            </div>
-          </div>
+          )}
 
-          <div className={`${formProgress === 1 ? 'flex' : 'hidden'}`}>
+          {formProgress === 1 && (
             <div className="flex flex-col gap-4">
               <h1 className="font-bold">
                 Was sind deine persönlichen Fitnessziele?
@@ -233,11 +236,10 @@ const Form = ({ formOpened, toggleForm }) => {
                   </label>
                   <input
                     onChange={(e) => handleCheckboxInput(setZiele1, e)}
-                    onKeyDown={(e) => handleCheckboxInput(setZiele1, e)}
                     className="h-4 w-4 cursor-pointer"
                     id="ziele1"
                     type="checkbox"
-                    value=""
+                    checked={ziele1}
                   />
                 </div>
                 <div className="flex flex-row-reverse items-center justify-end gap-2">
@@ -249,7 +251,7 @@ const Form = ({ formOpened, toggleForm }) => {
                     className="h-4 w-4 cursor-pointer"
                     id="ziele2"
                     type="checkbox"
-                    value=""
+                    checked={ziele2}
                   />
                 </div>
                 <div className="flex flex-row-reverse items-center justify-end gap-2">
@@ -261,6 +263,7 @@ const Form = ({ formOpened, toggleForm }) => {
                     className="h-4 w-4 cursor-pointer"
                     id="ziele3"
                     type="checkbox"
+                    checked={ziele3}
                   />
                 </div>
                 <div className="flex flex-row-reverse items-center justify-end gap-2">
@@ -272,13 +275,14 @@ const Form = ({ formOpened, toggleForm }) => {
                     className="h-4 w-4 cursor-pointer"
                     id="ziele4"
                     type="checkbox"
+                    checked={ziele4}
                   />
                 </div>
               </div>
             </div>
-          </div>
+          )}
 
-          <div className={`${formProgress === 2 ? 'flex' : 'hidden'}`}>
+          {formProgress === 2 && (
             <div className="flex flex-col gap-4">
               <h1 className="font-bold">Was bereitet dir noch Probleme?</h1>
               <div className="flex flex-col gap-2">
@@ -291,6 +295,7 @@ const Form = ({ formOpened, toggleForm }) => {
                     className="h-4 w-4 cursor-pointer"
                     id="probleme1"
                     type="checkbox"
+                    checked={probleme1}
                   />
                 </div>
                 <div className="flex flex-row-reverse items-center justify-end gap-2">
@@ -302,6 +307,7 @@ const Form = ({ formOpened, toggleForm }) => {
                     className="h-4 w-4 cursor-pointer"
                     id="probleme2"
                     type="checkbox"
+                    checked={probleme2}
                   />
                 </div>
                 <div className="flex flex-row-reverse items-center justify-end gap-2">
@@ -313,6 +319,7 @@ const Form = ({ formOpened, toggleForm }) => {
                     className="h-4 w-4 cursor-pointer"
                     id="probleme3"
                     type="checkbox"
+                    checked={probleme3}
                   />
                 </div>
                 <div className="flex flex-row-reverse items-center justify-end gap-2">
@@ -324,13 +331,14 @@ const Form = ({ formOpened, toggleForm }) => {
                     className="h-4 w-4 cursor-pointer"
                     id="probleme4"
                     type="checkbox"
+                    checked={probleme4}
                   />
                 </div>
               </div>
             </div>
-          </div>
+          )}
 
-          <div className={`${formProgress === 3 ? 'flex' : 'hidden'}`}>
+          {formProgress === 3 && (
             <div className="flex flex-col gap-4">
               <h1 className="font-bold">
                 Hast du schon Erfahrung mit EMS-Training gemacht?
@@ -345,6 +353,7 @@ const Form = ({ formOpened, toggleForm }) => {
                     className="h-4 w-4 cursor-pointer"
                     id="erfahrung1"
                     type="checkbox"
+                    checked={emsErfahrung1}
                   />
                 </div>
                 <div className="flex flex-row-reverse items-center justify-end gap-2">
@@ -356,13 +365,14 @@ const Form = ({ formOpened, toggleForm }) => {
                     className="h-4 w-4 cursor-pointer"
                     id="erfahrung2"
                     type="checkbox"
+                    checked={emsErfahrung2}
                   />
                 </div>
               </div>
             </div>
-          </div>
+          )}
 
-          <div className={`${formProgress === 4 ? 'flex' : 'hidden'}`}>
+          {formProgress === 4 && (
             <div className="flex w-full flex-col gap-4">
               <h1 className="font-bold">Wie lautet deine E-Mail Adresse?</h1>
               <div className="flex flex-col gap-2">
@@ -375,15 +385,16 @@ const Form = ({ formOpened, toggleForm }) => {
                     className="w-full cursor-pointer rounded-lg border border-zinc-300 p-2"
                     id="email1"
                     type="email"
+                    name="email"
                     placeholder="deine@mail.com"
-                    required={formProgress === 4 && true}
+                    required={formProgress === 4}
+                    value={email}
                   />
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className={`${formProgress === 5 ? 'flex' : 'hidden'}`}>
+          )}
+          {formProgress === 5 && (
             <div className="flex w-full flex-col gap-4">
               <h1 className="font-bold">Wie lautet deine Handynummer?</h1>
               <div className="flex flex-col gap-2">
@@ -396,15 +407,16 @@ const Form = ({ formOpened, toggleForm }) => {
                     className="w-full cursor-pointer rounded-lg border border-zinc-300 p-2"
                     id="handy1"
                     type="tel"
+                    name="tel"
                     placeholder="0123 456789"
-                    required={formProgress === 5 && true}
+                    required={formProgress === 5}
+                    value={phoneNumber}
                   />
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className={`${formProgress === 6 ? 'flex' : 'hidden'}`}>
+          )}
+          {formProgress === 6 && (
             <div className="flex w-full flex-col gap-4">
               <h1 className="font-bold">
                 Wann bist du in den nächsten 48 Stunden erreichbar?
@@ -418,16 +430,17 @@ const Form = ({ formOpened, toggleForm }) => {
                     onChange={(e) => handleInputChange(setErreichbar, e)}
                     className="w-full cursor-pointer rounded-lg border border-zinc-300 p-2"
                     id="erreichbar1"
+                    name="erreichbar"
                     type="text"
                     placeholder="z.B. 17:00 oder 'Morgen nachmittags' "
-                    required={formProgress === 6 && true}
+                    required={formProgress === 6}
+                    value={erreichbar}
                   />
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className={`${formProgress === 7 ? 'flex' : 'hidden'}`}>
+          )}
+          {formProgress === 7 && (
             <div className="flex w-full flex-col gap-4">
               <h1 className="font-bold">
                 Wir verwenden deine persönlichen Daten nur, damit wir das
@@ -448,12 +461,14 @@ const Form = ({ formOpened, toggleForm }) => {
                     onChange={(e) => handleCheckboxInput(setDatenschutz, e)}
                     className="flex h-4 w-4 cursor-pointer flex-row-reverse items-center justify-end gap-2"
                     id="datenschutz1"
+                    name="datenschutz"
                     type="checkbox"
+                    checked={datenschutz}
                   />
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div
