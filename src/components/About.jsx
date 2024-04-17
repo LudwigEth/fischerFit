@@ -15,32 +15,32 @@ const About = () => {
           gesundes Leben zu führen...
         </p>
         <ul className="flex flex-col gap-4 md:text-lg">
-          <li className="flex gap-2">
-            <span className="fas fa-angle-right leading-7 text-sky-500"></span>
+          <li className="flex items-baseline gap-2 sm:items-center">
+            <span className="fas fa-angle-right text-sky-500"></span>
             <p className="font-bold">
               Ems-Trainingsspezialist mit über 7 Jahren Erfahrung
             </p>
           </li>
-          <li className="flex gap-2">
-            <span className="fas fa-angle-right leading-7 text-sky-500"></span>
+          <li className="flex items-baseline gap-2 sm:items-center">
+            <span className="fas fa-angle-right text-sky-500"></span>
             <p className="font-bold">
               Seit 2019 selbständig mit eigenem EMS-Studio
             </p>
           </li>
-          <li className="flex gap-2">
-            <span className="fas fa-angle-right leading-7 text-sky-500"></span>
+          <li className="flex items-baseline gap-2 sm:items-center">
+            <span className="fas fa-angle-right text-sky-500"></span>
             <p className="font-bold">
               Hunderte von betreuten Klienten von Anfänger bis Profi
             </p>
           </li>
-          <li className="flex gap-2">
-            <span className="fas fa-angle-right leading-7 text-sky-500"></span>
+          <li className="flex items-baseline gap-2 sm:items-center">
+            <span className="fas fa-angle-right text-sky-500"></span>
             <p className="font-bold">
               Wettkampfsportler im Olympischen Gewichtheben gewesen
             </p>
           </li>
-          <li className="flex gap-2">
-            <span className="fas fa-angle-right leading-7 text-sky-500"></span>
+          <li className="flex items-baseline gap-2 sm:items-center">
+            <span className="fas fa-angle-right text-sky-500"></span>
             <p className="font-bold">
               Studium Sportökonomie an der Universität Bremen
             </p>
