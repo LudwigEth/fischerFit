@@ -9,9 +9,9 @@ const Accordion = ({ summary, text }) => {
     <div className="rounded-xl bg-white text-black">
       <div>
         <details onClick={toggleOpen} className="group peer">
-          <summary className="flex cursor-pointer items-center px-4 py-2">
+          <summary className="flex cursor-pointer items-baseline px-4 py-2 sm:items-center">
             <i
-              className={`fa fa-arrow-right mr-2 origin-center self-baseline text-lg text-sky-500 transition-transform duration-[250ms] ease-in-out group-open:rotate-90`}
+              className={`fa fa-arrow-right mr-2 origin-center text-lg text-sky-500 transition-transform duration-[250ms] ease-in-out group-open:rotate-90`}
             ></i>
             <h2 className="text-left font-semibold">{summary}</h2>
           </summary>
