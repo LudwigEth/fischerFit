@@ -1,9 +1,12 @@
+import logoDark from '../assets/mff-logo-dark.png'
+import logoLight from '../assets/mff-logo-light.png'
+
 const Logo = ({ classNames, dark = false }) => {
   return (
     <a href="#" className={`${classNames} flex h-fit items-center gap-1.5`}>
       <img
         className="h-[2rem]"
-        src={`${dark ? 'src/assets/mff-logo-dark.png' : 'src/assets/mff-logo-light.png'}`}
+        src={`${dark ? logoDark : logoLight}`}
         alt="Logo image"
       />
       <h1
